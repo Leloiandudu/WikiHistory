@@ -99,14 +99,7 @@ namespace WikiHistory.HelpFunctions
         currentNode = currentNode.SelectSingleNode("revisions");
         if (currentNode != null)
         {
-          try
-          {
-            this.rvstartid = Convert.ToInt64(currentNode.Attributes.GetNamedItem("rvstartid").Value);
-          }
-          catch
-          {
-            this.rvstartid = 0;
-          }
+          this.rvstartid = Convert.ToInt64(currentNode.Attributes.GetNamedItem("rvcontinue").Value);
         }
       }
 

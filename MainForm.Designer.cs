@@ -888,7 +888,7 @@
         this.MainMenuStrip = this.menuStrip1;
         this.MinimumSize = new System.Drawing.Size(658, 414);
         this.Name = "MainForm";
-        this.Text = "WikiHistory";
+        this.Text = "WikiHistory+";
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
         this.groupBox1.ResumeLayout(false);
         this.groupBox1.PerformLayout();

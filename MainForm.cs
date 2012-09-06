@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Collections.Specialized;
 using WikiHistory.HelpFunctions;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace WikiHistory
