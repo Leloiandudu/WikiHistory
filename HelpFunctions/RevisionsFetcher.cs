@@ -88,7 +88,8 @@ namespace WikiHistory.HelpFunctions
         attribute = rev.Attributes.GetNamedItem("size");
         if (attribute != null) { newRevision.size = Convert.ToInt32(attribute.Value); }
 
-        revisions.Add(newRevision);
+        if (newRevision.user != null || newRevision.anon)
+            revisions.Add(newRevision);
       }
 
       // query-continue

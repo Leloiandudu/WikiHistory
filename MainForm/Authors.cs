@@ -704,8 +704,9 @@ namespace WikiHistory
                 //TimeSpan t7 = t4 - t3;
                 //MessageBox.Show(i + ": " + (t7.Hours * 3600000 + t7.Minutes * 60000 + t7.Seconds * 1000.0 + t7.Milliseconds));
 
-                TimeSpan ts = DateTime.Now - tf;
-                double ws = ts.Hours * 3600000 + ts.Minutes * 60000 + ts.Seconds * 1000 + ts.Milliseconds;
+                var ws = (DateTime.Now - tf).TotalMilliseconds;
+                if (ws == 0)
+                    continue;
 
                 f2size = 0; ls = 0;
                 for (int iq = 0; iq < i; iq++)
