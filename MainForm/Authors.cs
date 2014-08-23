@@ -689,6 +689,8 @@ namespace WikiHistory
                     this.Invoke(new ShowProgressDelegate(showProgress), new object[] { (trying > 1 ? "(попытка " + trying : "") + "Загрузка текста для версии " + rev.id.ToString() + " (" + DateTimeHelpFunctions.DateTimeToString(rev.timestamp) + ") .... " + (100 * i / revisionNumber) + "%", (double)i / revisionNumber });
                     rev.LoadFullText();
                 }
+                if (rev.Deleted)
+                    continue;
                 if (!rev.fullTextLoaded)
                 {
                     Thread.Sleep(sleepms);

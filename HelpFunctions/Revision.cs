@@ -81,13 +81,23 @@ namespace WikiHistory.HelpFunctions
             this.SaveToDisk();
             this.fullText = tmp;
         }
+        return;
+      }
+      catch(WebException ex)
+      {
+          var response = ex.Response as HttpWebResponse;
+          if (response != null && response.StatusCode == HttpStatusCode.NotFound)
+              Deleted = true;
       }
       catch
       {
-        this.fullText = "";
-        this.fullTextLoaded = false;
       }
+
+      this.fullText = "";
+      this.fullTextLoaded = false;
     }
+
+    public bool Deleted { get; private set; }
 
     public void SaveToDisk()
     {
