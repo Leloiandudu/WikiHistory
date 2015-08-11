@@ -86,7 +86,7 @@
         downloading = true;
         downloadedString = "";
         client1.DownloadStringCompleted += HandleDownloadStringCompleted;
-        client1.DownloadStringAsync(new Uri(baseUrl + "api.php?action=opensearch&search=" + HttpUtility.UrlEncode(search) + "&namespace=0&limit=" + maxResults.ToString()));
+        client1.DownloadStringAsync(new Uri(baseUrl + "api.php?action=opensearch&search=" + Uri.EscapeDataString(search) + "&namespace=0&limit=" + maxResults.ToString()));
         while (downloading)
         {
           TimeSpan execTime = DateTime.Now.Subtract(start);

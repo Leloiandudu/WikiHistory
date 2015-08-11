@@ -39,7 +39,7 @@ namespace WikiHistory.HelpFunctions
     public List<Revision> getRevisions(string title)
     {
       // prepare
-      string url = this.baseUrl + "api.php?action=query&prop=revisions&titles=" + HttpUtility.UrlEncode(title) + "&rvlimit=500&format=xml&rvprop=ids|timestamp|flags|comment|user|size";
+      string url = this.baseUrl + "api.php?action=query&prop=revisions&titles=" + Uri.EscapeDataString(title) + "&rvlimit=500&format=xml&rvprop=ids|timestamp|flags|comment|user|size";
       if (continueStr != null)
         url += continueStr;
       else

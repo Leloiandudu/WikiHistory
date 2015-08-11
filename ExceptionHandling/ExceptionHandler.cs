@@ -38,7 +38,7 @@ namespace ExceptionHandling
 
     private void buttonSend_Click(object sender, EventArgs e)
     {
-      string url = errorBaseUrl + "?program=" + HttpUtility.UrlEncode(programName);
+      string url = errorBaseUrl + "?program=" + Uri.EscapeDataString(programName);
       // add md5
       byte[] tmpHash = new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.ASCII.GetBytes(errorReport));
       url += "&h=" + ByteArrayToString(tmpHash);
@@ -48,7 +48,7 @@ namespace ExceptionHandling
       request.ProtocolVersion = HttpVersion.Version10;
       request.Method = "POST";
       request.ContentType = "application/x-www-form-urlencoded";
-      byte[] postBytes = ASCIIEncoding.ASCII.GetBytes("error=" + HttpUtility.UrlEncode(errorReport));
+      byte[] postBytes = ASCIIEncoding.ASCII.GetBytes("error=" + Uri.EscapeDataString(errorReport));
       request.ContentLength = postBytes.Length;
       Stream stream = request.GetRequestStream();
       stream.Write(postBytes, 0, postBytes.Length);

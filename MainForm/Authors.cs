@@ -560,7 +560,7 @@ namespace WikiHistory
             if (already + rvl > revisionNumber) { rvl = revisionNumber - already + 1; }
             String rvlimit = "" + rvl;
             already += rvl;
-            String url = Projects.currentProjectBaseUrl + "api.php?format=xml&action=query&prop=revisions&rvlimit=" + rvlimit + "&rvdir=newer&titles=" + HttpUtility.UrlEncode(Revision.currentTitle) + "&rvprop=content|ids&" + rvstartid;
+            String url = Projects.currentProjectBaseUrl + "api.php?format=xml&action=query&prop=revisions&rvlimit=" + rvlimit + "&rvdir=newer&titles=" + Uri.EscapeDataString(Revision.currentTitle) + "&rvprop=content|ids&" + rvstartid;
 
             if (bwAuthors.CancellationPending)
             {
