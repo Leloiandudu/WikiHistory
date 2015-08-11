@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Net;
 using System.Web;
 using System.Xml;
-using System.Windows.Forms;
+
 namespace WikiHistory.HelpFunctions
 {
  
@@ -24,22 +25,25 @@ namespace WikiHistory.HelpFunctions
     public RevisionsFetcher(string baseUrl)
     {
       this.baseUrl = baseUrl;
-      Reset();
     }
 
     public void Reset()
     {
-      rvstartid = 0;
+      continueStr = null;
       ready = false;
     }
 
     public bool ready;
-    private Int64 rvstartid;
+    private string continueStr;
+
     public List<Revision> getRevisions(string title)
     {
       // prepare
       string url = this.baseUrl + "api.php?action=query&prop=revisions&titles=" + HttpUtility.UrlEncode(title) + "&rvlimit=500&format=xml&rvprop=ids|timestamp|flags|comment|user|size";
-      if (rvstartid > 0) url += "&rvstartid=" + this.rvstartid.ToString();
+      if (continueStr != null)
+        url += continueStr;
+      else
+        url += "&continue=";
 
       // load
       WebClient client1 = new WebClient();
@@ -52,8 +56,6 @@ namespace WikiHistory.HelpFunctions
       catch  { return revisions; }
       XmlNode xmlRevisions = xmlDoc.DocumentElement;
       XmlNode currentNode;
-
-      
 
       this.ready = true;
 
@@ -93,14 +95,18 @@ namespace WikiHistory.HelpFunctions
       }
 
       // query-continue
-      currentNode = xmlRevisions.SelectSingleNode("query-continue");
+      currentNode = xmlRevisions.SelectSingleNode("continue");
       if (currentNode != null)
       {
         this.ready = false;
-        currentNode = currentNode.SelectSingleNode("revisions");
         if (currentNode != null)
         {
-          this.rvstartid = Convert.ToInt64(currentNode.Attributes.GetNamedItem("rvcontinue").Value);
+          this.continueStr = "&" + string.Join("&", 
+            currentNode.Attributes
+              .Cast<XmlAttribute>()
+              .Select(a => Uri.EscapeDataString(a.Name) + "=" + Uri.EscapeDataString(a.Value))
+              .ToArray()
+          );
         }
       }
 
