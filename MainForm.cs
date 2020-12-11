@@ -12,6 +12,8 @@ using System.Threading;
 using System.Collections.Specialized;
 using WikiHistory.HelpFunctions;
 using System.Reflection;
+using System.Security.Authentication;
+using System.Net;
 
 namespace WikiHistory
 {
@@ -37,9 +39,15 @@ namespace WikiHistory
 
     ListViewColumnSorter lvwColumnSorterEdits = new ListViewColumnSorter();
     ListViewColumnSorter lvwColumnSorterUsers = new ListViewColumnSorter();
+
+    public const SslProtocols _Tls12 = (SslProtocols)0x00000C00;
+    public const SecurityProtocolType Tls12 = (SecurityProtocolType)_Tls12;
+
     public MainForm()
     {
       InitializeComponent();
+
+      ServicePointManager.SecurityProtocol = Tls12;
 
       if (Properties.Settings.Default.NeedUpgrade)
       {

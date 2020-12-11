@@ -32,30 +32,30 @@ namespace WikiHistory.HelpFunctions
     }
 
     public static List<Project> projects = new List<Project>();
-    public static string currentProjectBaseUrl = "http://en.wikipedia.org/w/";
+    public static string currentProjectBaseUrl = "https://en.wikipedia.org/w/";
     public static string currentProjectSaveName = "en.wikipedia";
 
     static Projects()
     {
       Project newProject;
 
-      // TODO: fill this automatically from http://en.wikipedia.org/w/api.php?action=sitematrix
+      // TODO: fill this automatically from https://en.wikipedia.org/w/api.php?action=sitematrix
 
       // Wikipedia
       newProject = new Project();
       newProject.shortname = "wikipedia"; // not wiki
       newProject.longname = "Wikipedia";
       #region "Wikipedia" languages
-      newProject.languages.Add(new ProjectLanguage("de", "Deutsch", "http://de.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("en", "English", "http://en.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("es", "Español", "http://en.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("fr", "Français", "http://fr.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("it", "Italiano", "http://it.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("ja", "日本語", "http://ja.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("pl", "Polski", "http://pl.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("pt", "Português", "http://pt.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("ru", "Русский", "http://ru.wikipedia.org"));
-      newProject.languages.Add(new ProjectLanguage("zh", "中文", "http://zh.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("de", "Deutsch", "https://de.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("en", "English", "https://en.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("es", "Español", "https://es.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("fr", "Français", "https://fr.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("it", "Italiano", "https://it.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("ja", "日本語", "https://ja.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("pl", "Polski", "https://pl.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("pt", "Português", "https://pt.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("ru", "Русский", "https://ru.wikipedia.org"));
+      newProject.languages.Add(new ProjectLanguage("zh", "中文", "https://zh.wikipedia.org"));
       #endregion
       newProject.standardLanguage = "en"; // English
       projects.Add(newProject);
@@ -64,7 +64,7 @@ namespace WikiHistory.HelpFunctions
       newProject = new Project();
       newProject.shortname = "commons";
       newProject.longname = "Wikimedia Commons";
-      newProject.baseUrl = "http://commons.wikimedia.org";
+      newProject.baseUrl = "https://commons.wikimedia.org";
       projects.Add(newProject);
         
 
